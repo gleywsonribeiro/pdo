@@ -18,7 +18,11 @@ and open the template in the editor.
         require_once './ServiceProduto.php';
         
         $conexao = new Conexao("localhost", "pdo", "root", "");
+        $produto = new Produto();
         
+        $service = new ServiceProduto($conexao, $produto);
+        
+        print_r($service->listar());
         ?>
     </body>
 </html>

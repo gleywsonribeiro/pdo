@@ -14,7 +14,7 @@ class Conexao implements IConexao {
         $this->pass = $pass;
     }
 
-    public function conect() {
+    public function connect() {
         try {
             return new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->user, $this->pass);
         } catch (PDOException $e) {
