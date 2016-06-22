@@ -17,14 +17,20 @@ and open the template in the editor.
         require_once './Produto.php';
         require_once './ServiceProduto.php';
         
-        $conexao = new Conexao("localhost", "pdo", "root", "");
+        $conexao = new Conexao("localhost", "pdo", "root", "systemcall");
         $produto = new Produto();
         $produto->setNome("Livro")
                 ->setPreco(400);
         
+        $produto->setId(1)
+                ->setNome("Smartphone Moto X")
+                ->setPreco(1250);
+        
         $service = new ServiceProduto($conexao, $produto);
         
-        print_r($service->salvar());
+        //print_r($service->alterar());
+        
+        print_r($service->find(1));
         ?>
     </body>
 </html>

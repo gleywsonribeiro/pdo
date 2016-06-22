@@ -16,6 +16,15 @@ class ServiceProduto {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function find($id) {
+        $query = "select * from `produto` where `id`=:id";
+        $statement = $this->db->prepare($query);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+
     public function salvar() {
         $query = "insert into `produto`(`nome`,`preco`) values(:nome, :preco)";
         $stmt = $this->db->prepare($query);
@@ -31,10 +40,16 @@ class ServiceProduto {
         $stmt->bindValue(1, $this->produto->getNome());
         $stmt->bindValue(2, $this->produto->getPreco());
         $stmt->bindValue(3, $this->produto->getId());
+        $status = $stmt->execute();
+        return $status;
     }
     
-    public function deletar() {
-        
+    public function deletar(int $id) {
+        $query = "delete `produto` where `id`=:id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $status = $stmt->execute();
+        return $status;
     }
 }
 
