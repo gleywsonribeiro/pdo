@@ -1,7 +1,7 @@
 <?php
 
 
-class Produto {
+class Produto implements IProduto{
     private $id;
     private $nome;
     private $preco;

@@ -13,16 +13,18 @@ and open the template in the editor.
         <?php
         require_once './IConexao.php';
         require_once './Conexao.php';
-        require_once './IProduct.php';
+        require_once './IProduto.php';
         require_once './Produto.php';
         require_once './ServiceProduto.php';
         
         $conexao = new Conexao("localhost", "pdo", "root", "");
         $produto = new Produto();
+        $produto->setNome("Livro")
+                ->setPreco(400);
         
         $service = new ServiceProduto($conexao, $produto);
         
-        print_r($service->listar());
+        print_r($service->salvar());
         ?>
     </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-interface IProduct {
+interface IProduto {
     public function getId();
     public function getNome();
     public function getPreco();

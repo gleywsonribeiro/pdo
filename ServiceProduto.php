@@ -4,7 +4,7 @@ class ServiceProduto {
     private $db;
     private $produto;
     
-    public function __construct(IConexao $db, IProduct $produto) {
+    public function __construct(IConexao $db, IProduto $produto) {
         $this->db = $db->connect();
         $this->produto = $produto;
     }
@@ -17,11 +17,20 @@ class ServiceProduto {
     }
     
     public function salvar() {
-        
+        $query = "insert into `produto`(`nome`,`preco`) values(:nome, :preco)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(":nome", $this->produto->getNome());
+        $stmt->bindValue(":preco", $this->produto->getPreco());
+        $stmt->execute();
+        return $this->db->lastInsertId();
     }
     
     public function alterar() {
-        
+        $query = "update `produto` set `nome`=?, `preco`=? where `id`=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(1, $this->produto->getNome());
+        $stmt->bindValue(2, $this->produto->getPreco());
+        $stmt->bindValue(3, $this->produto->getId());
     }
     
     public function deletar() {
